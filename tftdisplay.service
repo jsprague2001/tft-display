@@ -1,1 +1,13 @@
-a
+[Unit]
+Description=TFT Display for Audio Service
+After=network.target
+
+[Service]
+Type=simple
+User=admin
+Group=admin
+ExecStart=/home/admin/tft-display/xdisp.py
+WorkingDirectory=/home/pi
+
+[Install]
+WantedBy=multi-user.target
