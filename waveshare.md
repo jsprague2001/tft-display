@@ -18,7 +18,7 @@ We provide complete supporting Raspberry Pi demos (BCM2835 library, WiringPi lib
 ## Raspberry Pi hardware connection
 
 ```
-EPD  	  =>	RPI(BCM)
+EPD  	=>	RPI(BCM)
 VCC    	->    	5V
 GND    	->    	GND
 DIN    	->    	10(SPI0_MOSI)
@@ -26,5 +26,5 @@ CLK    	->    	11(SPI0_SCK)
 CS     	->    	8(CE0)
 DC     	->    	25
 RST    	->    	27
-BL  	  ->    	18
+BL  	->    	18
 ```
