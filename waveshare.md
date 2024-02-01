@@ -14,3 +14,14 @@ We provide complete supporting Raspberry Pi demos (BCM2835 library, WiringPi lib
 * Display Size: 36.72（H）x 48.96（V）mm
 * Pixel Size: 0.153（H）x 0.153（V）mm
 * Dimension: 70.5 x 43.3(mm)
+
+## Raspberry Pi hardware connection
+EPD  	  =>	RPI(BCM)
+VCC    	->    	5V
+GND    	->    	GND
+DIN    	->    	10(SPI0_MOSI)
+CLK    	->    	11(SPI0_SCK)
+CS     	->    	8(CE0)
+DC     	->    	25
+RST    	->    	27
+BL  	  ->    	18
