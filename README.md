@@ -39,6 +39,7 @@ $ source ./v_env/bin/activate
 
 ```
 $ cat tftdisplay.service
+# Install the service
 $ sudo cp tftdisplay.service /etc/systemd/system/tftdisplay.service
 ```
 Problems with the service? Check permissions in ```/etc/systemd/system/```
