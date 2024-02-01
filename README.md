@@ -35,7 +35,24 @@ $ source ./v_env/bin/activate
 (v_env) admin@lcdnas:$
 ```
 
+## Setup a systemd service
 
+```
+pi@waveberry:~/p_audio_display $ cat tftdisplay.service
 
+[Unit]
+Description=TFT Display for Audio Service
+After=network.target
+
+[Service]
+Type=simple
+User=admin
+Group=admin
+ExecStart=/home/admin/tft-display/xdisp.py
+WorkingDirectory=/home/pi
+
+[Install]
+WantedBy=multi-user.target
+```
 
 
