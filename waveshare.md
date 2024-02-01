@@ -16,6 +16,8 @@ We provide complete supporting Raspberry Pi demos (BCM2835 library, WiringPi lib
 * Dimension: 70.5 x 43.3(mm)
 
 ## Raspberry Pi hardware connection
+
+```
 EPD  	  =>	RPI(BCM)
 VCC    	->    	5V
 GND    	->    	GND
@@ -25,3 +27,4 @@ CS     	->    	8(CE0)
 DC     	->    	25
 RST    	->    	27
 BL  	  ->    	18
+```
