@@ -38,21 +38,22 @@ $ source ./v_env/bin/activate
 ## Setup a systemd service
 
 ```
-pi@waveberry:~/p_audio_display $ cat tftdisplay.service
-
-[Unit]
-Description=TFT Display for Audio Service
-After=network.target
-
-[Service]
-Type=simple
-User=admin
-Group=admin
-ExecStart=/home/admin/tft-display/xdisp.py
-WorkingDirectory=/home/pi
-
-[Install]
-WantedBy=multi-user.target
+$ cat tftdisplay.service
+$ sudo cp tftdisplay.service /etc/systemd/system/tftdisplay.service
 ```
+Problems with the service? Check permissions in ```/etc/systemd/system/```
 
+## Manage services
+
+```
+$ sudo systemctl start tftdisplay.service
+$ sudo systemctl enable tftdisplay.service
+$ systemctl status tftdisplay.service
+
+# Service logging
+$ journalctl -u tftdisplay.service
+
+# Log messages for the current boot:
+$ journalctl -u tftdisplay.service -b
+```
 
