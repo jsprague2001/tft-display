@@ -7,7 +7,7 @@ Type=simple
 User=admin
 Group=admin
 ExecStart=/home/admin/tft-display/tft-display.py
-WorkingDirectory=/home/pi
+WorkingDirectory=/home/admin
 
 [Install]
 WantedBy=multi-user.target
