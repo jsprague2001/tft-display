@@ -1,3 +1,4 @@
+#!/home/admin/tft-display/v_env/bin/python
 # -*- coding: UTF-8 -*-
 import os
 import sys
