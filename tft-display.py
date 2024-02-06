@@ -86,11 +86,9 @@ def server_request(debug):
         #print("Updated Dict is:", dict)
 
     else:
+        print('Could not connect to: ', url_mdata)
         server_data = {'artist': '--00--', 'title': 'Trying: ' + server, 'playerName': 'Con Error',\
         'playerState': 'Con Error', 'percent': 0}
-
-        server_data = {}
-        print('Could not connect to: ', url_mdata)
 
     return server_data
 
