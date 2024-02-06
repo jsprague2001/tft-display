@@ -34,7 +34,8 @@ $ sudo raspi-config
 $ cd tft-display
 $ python -m venv --system-site-packages v_env
 $ source ./v_env/bin/activate
-(v_env) admin@lcdnas:$
+# Make script executable
+(v_env) admin@lcdnas:~/tft-display $ chmod 755 tft-display.py 
 ```
 
 ## Setup a systemd service
