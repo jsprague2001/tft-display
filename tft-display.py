@@ -135,11 +135,16 @@ def lcd_draw(server_json, ip_addr):
     canvas_layer.paste(rotated_text_layer, (0,0))
     disp.ShowImage(canvas_layer)
 
+def getip():
+    cmd = "hostname -I"
+    ip_all = "IP: " + subprocess.check_output(cmd, shell=True).decode("utf-8")
+    ip_addr = ip_all.split()
+    return ip_addr[1]
+
 def main():
     server_json = server_request(0)
     # print(server_json)
-    cmd = "hostname -I"
-    ip_addr = "IP: " + subprocess.check_output(cmd, shell=True).decode("utf-8")
+    ip_addr = getip()
     lcd_draw(server_json, ip_addr)
 
 while True:
