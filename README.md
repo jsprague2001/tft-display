@@ -1,5 +1,9 @@
 # tft-display
 
+Raspberry Pi OS: 11 (bullseye) 32-bit
+
+Release date: December 5th 2023
+
 This purpose of this repository is to setup a TFT LCD Display for use with the Audio Service. The LCD is a Waveshare 2.4inch TFT display module with a resolution of 240 x 320. The display uses the SPI interface on a Raspberry Pi.
 
 ## Setup new Raspberry PI 4
