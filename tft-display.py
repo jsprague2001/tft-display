@@ -59,7 +59,7 @@ def server_request(debug):
 
     try:
         resp = requests.get(url_mdata)
-    except requests.exceptions.RequestException as e:  # This is the correct syntax
+    except requests.exceptions.RequestException as e:
         connflag = 1
 
     if(connflag == 0):
@@ -80,10 +80,8 @@ def server_request(debug):
         server_data = {'artist': json_mdata['artist'], 'title': json_mdata['title'], 'playerName': json_mdata['playerName'],\
         'playerState': json_mdata['playerState'], 'percent': json_volume['percent']}
 
-        # if null data then
-        #dict['key2'] = 'for'
-        #dict['key3'] = 'geeks'
-        #print("Updated Dict is:", dict)
+        # Need a check for null or None data types.
+        # server_data['artist'] = 'Thing'
 
     else:
         print('Could not connect to: ', url_mdata)
@@ -101,6 +99,10 @@ def lcd_draw(server_json, ip_addr):
     y = 0
     x = 0
     xclock = 60
+    speaker_icon = Image.open("/home/admin/tft-display/pic/speaker-icon-sm.jpg")
+    play_icon    = Image.open("/home/admin/tft-display/pic/play-icon-sm.jpg")
+    pause_icon   = Image.open("/home/admin/tft-display/pic/pause-icon-sm.jpg")
+
     # Get the height of the fonts using getbbox = (left, top, right, bottom)
     a,b,c, clock_h  = clock_font.getbbox("Text")
     a,b,c, large_h  = large_font.getbbox("Text")
@@ -127,29 +129,26 @@ def lcd_draw(server_json, ip_addr):
     text_draw.text((x, y), server_json['title'][20:], font=small_font, fill="#FFFFFF")
     y += small_h + 20
 
-
-    text_draw.line((0, y, 320, y), fill="white", width=2)
+    # Status line section of the display
+    text_draw.line((0, y, 320, y), fill="white", width=1)
     y += tiny_h
 
-    text_draw.text((x, y), server_json['playerName'].capitalize() + "  Volume: " + str(int(server_json['percent'])) + "%", \
-    font=small_font, fill="white")
+    text_layer.paste(speaker_icon, (215,y+2))
+    text_draw.text((245, y), str(int(server_json['percent'])) + "%", font=small_font, fill="white")
 
-    speaker_icon = Image.open("./pic/speaker-icon-sm.jpg")
-    play_icon    = Image.open("./pic/play-icon-sm.jpg")
-    pause_icon   = Image.open("./pic/pause-icon-sm.jpg")
+    if server_json['playerState'] == 'playing':
+        text_layer.paste(pause_icon, (x,y+2))
+    if server_json['playerState'] == 'paused':
+        text_layer.paste(play_icon, (x,y+2))
+    if server_json['playerState'] == None:
+        text_draw.text((x+3,y), '?', font=small_font, fill="white")
 
-    text_draw.text((x, 220), "SecondWave v0.2 " + ip_addr, font=tiny_font, fill="#FFFFFF")
+    text_draw.text((x+27, y), server_json['playerName'].capitalize(), font=small_font, fill="white")
 
-#    text_layer.paste(speaker_icon, (200,200))
-
-    text_layer.paste(speaker_icon, (230,180))
+    text_draw.text((x, 220), "SecondWave v0.2   IP:" + ip_addr, font=tiny_font, fill="#FFFFFF")
 
     rotated_text_layer = text_layer.rotate(90)
-#    text_draw.line((50, 100, 50, 150), fill=(0, 0, 0), width=10)
-
-
     canvas_layer.paste(rotated_text_layer, (0,0))
-
     disp.ShowImage(canvas_layer)
 
 def getip():
