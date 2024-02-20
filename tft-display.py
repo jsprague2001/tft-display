@@ -125,10 +125,10 @@ def lcd_draw(server_json, ip_addr):
     text_draw.text((x, y), server_json['artist'], font=medium_font, fill="#FFFFFF")
     y += medium_h + 6
 
-    text_draw.text((x, y), server_json['title'][:20], font=small_font, fill="#FFFFFF")
+    text_draw.text((x, y), server_json['title'][:22], font=small_font, fill="#FFFFFF")
     y += small_h + 6
 
-    text_draw.text((x, y), server_json['title'][20:], font=small_font, fill="#FFFFFF")
+    text_draw.text((x, y), server_json['title'][22:], font=small_font, fill="#FFFFFF")
     y += small_h + 20
 
     # Status section of the display
