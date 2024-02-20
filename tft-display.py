@@ -100,7 +100,7 @@ def lcd_draw(server_json, ip_addr):
     now = datetime.now()
     y = 0
     x = 0
-    xclock = 20
+    xclock = 60
     # Get the height of the fonts using getbbox = (left, top, right, bottom)
     a,b,c, clock_h  = clock_font.getbbox("Text")
     a,b,c, large_h  = large_font.getbbox("Text")
@@ -114,12 +114,9 @@ def lcd_draw(server_json, ip_addr):
 
     text_draw = ImageDraw.Draw(text_layer)
 
-    text_draw.text((xclock+30, y), now.strftime("%I:%M"), font=large_font, fill="#FFFFFF")
-    text_draw.text((xclock+190, y+5), now.strftime("%p"), font=small_font, fill="#FFFFFF")
-
+    text_draw.text((xclock, y), now.strftime("%I:%M"), font=large_font, fill="#FFFFFF")
+    text_draw.text((xclock+160, y+5), now.strftime("%p"), font=small_font, fill="#FFFFFF")
     y += clock_h + 6
-    text_draw.text((x, y), server_json['playerName'].capitalize() + "  Volume: " + str(int(server_json['percent'])) + "%", font=small_font, fill="#FFFFFF")
-    y += small_h + 6
 
     text_draw.text((x, y), server_json['artist'], font=medium_font, fill="#FFFFFF")
     y += medium_h + 6
@@ -128,11 +125,31 @@ def lcd_draw(server_json, ip_addr):
     y += small_h + 6
 
     text_draw.text((x, y), server_json['title'][20:], font=small_font, fill="#FFFFFF")
+    y += small_h + 20
 
-    text_draw.text((x, 200), "SecondWave v0.2 " + ip_addr, font=tiny_font, fill="#FFFFFF")
+
+    text_draw.line((0, y, 320, y), fill="white", width=2)
+    y += tiny_h
+
+    text_draw.text((x, y), server_json['playerName'].capitalize() + "  Volume: " + str(int(server_json['percent'])) + "%", \
+    font=small_font, fill="white")
+
+    speaker_icon = Image.open("./pic/speaker-icon-sm.jpg")
+    play_icon    = Image.open("./pic/play-icon-sm.jpg")
+    pause_icon   = Image.open("./pic/pause-icon-sm.jpg")
+
+    text_draw.text((x, 220), "SecondWave v0.2 " + ip_addr, font=tiny_font, fill="#FFFFFF")
+
+#    text_layer.paste(speaker_icon, (200,200))
+
+    text_layer.paste(speaker_icon, (230,180))
 
     rotated_text_layer = text_layer.rotate(90)
+#    text_draw.line((50, 100, 50, 150), fill=(0, 0, 0), width=10)
+
+
     canvas_layer.paste(rotated_text_layer, (0,0))
+
     disp.ShowImage(canvas_layer)
 
 def getip():
@@ -143,7 +160,6 @@ def getip():
 
 def main():
     server_json = server_request(0)
-    # print(server_json)
     ip_addr = getip()
     lcd_draw(server_json, ip_addr)
 
