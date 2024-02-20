@@ -10,6 +10,7 @@ This purpose of this repository is to setup a TFT LCD Display for use with the A
 ```
 $ sudo apt update
 $ sudo apt upgrade
+
 $ sudo apt update -y && sudo apt full-upgrade -y
 ```
 
@@ -18,6 +19,8 @@ $ sudo apt update -y && sudo apt full-upgrade -y
 $ sudo apt install python3-pip
 $ sudo apt-get install python3-venv
 $ sudo apt-get install git
+
+$ sudo apt install python3-pip -y && sudo apt-get install python3-venv -y && sudo apt-get install git
 ```
 
 ## Clone repository
