@@ -10,6 +10,7 @@ This purpose of this repository is to setup a TFT LCD Display for use with the A
 ```
 $ sudo apt update
 $ sudo apt upgrade
+$ sudo apt update -y && sudo apt full-upgrade -y
 ```
 
 ## Setup system-wide libraries
