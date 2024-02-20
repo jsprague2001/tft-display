@@ -20,6 +20,12 @@ BL = 18
 bus = 0
 device = 0
 
+# Icons
+icon_path    = '/home/admin/tft-display/pic/'
+speaker_icon = Image.open(icon_path + "speaker-icon-sm.jpg")
+play_icon    = Image.open(icon_path + "play-icon-sm.jpg")
+pause_icon   = Image.open(icon_path + "pause-icon-sm.jpg")
+
 # Fonts
 font_path   = '/usr/share/fonts/truetype/dejavu/'
 clock_font  = ImageFont.truetype(font_path + "DejaVuSans.ttf", 55)
@@ -99,9 +105,6 @@ def lcd_draw(server_json, ip_addr):
     y = 0
     x = 0
     xclock = 60
-    speaker_icon = Image.open("/home/admin/tft-display/pic/speaker-icon-sm.jpg")
-    play_icon    = Image.open("/home/admin/tft-display/pic/play-icon-sm.jpg")
-    pause_icon   = Image.open("/home/admin/tft-display/pic/pause-icon-sm.jpg")
 
     # Get the height of the fonts using getbbox = (left, top, right, bottom)
     a,b,c, clock_h  = clock_font.getbbox("Text")
@@ -113,7 +116,6 @@ def lcd_draw(server_json, ip_addr):
     canvas_layer = Image.new('RGB', (disp.width, disp.height), "BLACK")
     #img_draw = ImageDraw.Draw(canvas_layer) <- is this needed?
     text_layer = Image.new('RGB', (320, 320))
-
     text_draw = ImageDraw.Draw(text_layer)
 
     text_draw.text((xclock, y), now.strftime("%I:%M"), font=large_font, fill="#FFFFFF")
@@ -129,7 +131,7 @@ def lcd_draw(server_json, ip_addr):
     text_draw.text((x, y), server_json['title'][20:], font=small_font, fill="#FFFFFF")
     y += small_h + 20
 
-    # Status line section of the display
+    # Status section of the display
     text_draw.line((0, y, 320, y), fill="white", width=1)
     y += tiny_h
 
@@ -144,7 +146,6 @@ def lcd_draw(server_json, ip_addr):
         text_draw.text((x+3,y), '?', font=small_font, fill="white")
 
     text_draw.text((x+27, y), server_json['playerName'].capitalize(), font=small_font, fill="white")
-
     text_draw.text((x, 220), "SecondWave v0.2   IP:" + ip_addr, font=tiny_font, fill="#FFFFFF")
 
     rotated_text_layer = text_layer.rotate(90)
