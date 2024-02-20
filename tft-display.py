@@ -83,11 +83,14 @@ def server_request(debug):
             print(url_mdata, json.dumps(x_mdata.json()),'\n')
             print(url_volume, json.dumps(x_volume.json()),'\n')
 
-        server_data = {'artist': json_mdata['artist'], 'title': json_mdata['title'], 'playerName': json_mdata['playerName'],\
-        'playerState': json_mdata['playerState'], 'percent': json_volume['percent']}
+        if json_mdata['artist'] == None:
+            server_data = {'artist': '--00--', 'title': 'Connected to: ' + server, 'playerName': 'No Data',\
+            'playerState': 'No Data', 'percent': 0}
 
-        # Need a check for null or None data types.
-        # server_data['artist'] = 'Thing'
+        else:
+            server_data = {'artist': json_mdata['artist'], 'title': json_mdata['title'], 'playerName': json_mdata['playerName'],\
+            'playerState': json_mdata['playerState'], 'percent': json_volume['percent']}
+
 
     else:
         print('Could not connect to: ', url_mdata)
@@ -142,7 +145,7 @@ def lcd_draw(server_json, ip_addr):
         text_layer.paste(pause_icon, (x,y+2))
     if server_json['playerState'] == 'paused':
         text_layer.paste(play_icon, (x,y+2))
-    if server_json['playerState'] == None:
+    if server_json['playerState'] == 'No Data':
         text_draw.text((x+3,y), '?', font=small_font, fill="white")
 
     text_draw.text((x+27, y), server_json['playerName'].capitalize(), font=small_font, fill="white")
