@@ -43,7 +43,7 @@ $ cd tft-display
 $ python -m venv --system-site-packages v_env
 $ source ./v_env/bin/activate
 # Make script executable
-(v_env) admin@lcdnas:~/tft-display $ chmod 755 tft-display.py 
+(v_env) admin@lcdnas:~/tft-display $ chmod +x tft-display.py 
 ```
 
 ## Setup a systemd service
