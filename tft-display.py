@@ -20,14 +20,20 @@ BL = 18
 bus = 0
 device = 0
 
+# print(os.getcwd())
+config_f = open('config.json')
+config_data = json.load(config_f)
+config_f.close()
+
+
 # Icons
-icon_path    = '/home/admin/tft-display/pic/'
+icon_path    = config_data['icon_path']
 speaker_icon = Image.open(icon_path + "speaker-icon-sm.jpg")
 play_icon    = Image.open(icon_path + "play-icon-sm.jpg")
 pause_icon   = Image.open(icon_path + "pause-icon-sm.jpg")
 
 # Fonts
-font_path   = '/usr/share/fonts/truetype/dejavu/'
+font_path   = config_data['font_path']
 clock_font  = ImageFont.truetype(font_path + "DejaVuSans.ttf", 55)
 large_font  = ImageFont.truetype(font_path + "DejaVuSans.ttf", 55)
 medium_font = ImageFont.truetype(font_path + "DejaVuSans.ttf", 38)
@@ -36,7 +42,7 @@ tiny_font   = ImageFont.truetype(font_path + "DejaVuSans.ttf", 15)
 
 # HTTP info
 baseurl = "http://"
-server  = "192.168.11.96:81"
+server  = config_data['server']
 mdata  = "/api/track/metadata"
 status  = "/api/player/status"
 volume  = "/api/volume"
@@ -123,6 +129,7 @@ def lcd_draw(server_json, ip_addr):
 
     text_draw.text((xclock, y), now.strftime("%I:%M"), font=large_font, fill="#FFFFFF")
     text_draw.text((xclock+160, y+5), now.strftime("%p"), font=small_font, fill="#FFFFFF")
+    # Increment the y axis by the height of the previously used font
     y += clock_h + 6
 
     text_draw.text((x, y), server_json['artist'], font=medium_font, fill="#FFFFFF")
