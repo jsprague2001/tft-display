@@ -20,7 +20,7 @@ $ sudo apt install python3-pip
 $ sudo apt-get install python3-venv
 $ sudo apt-get install git
 
-$ sudo apt install python3-pip -y && sudo apt-get install python3-venv -y && sudo apt-get install git -y
+$ sudo apt install python3-pip -y && sudo apt-get install python3-venv -y && sudo apt-get install git -y (Don't need this with Bookworm)
 ```
 
 ## Clone repository
